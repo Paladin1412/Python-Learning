@@ -23,3 +23,22 @@ class Vector:
     def __mul__(self, scalar):
         return Vector(self.x * scalar, self.y * scalar)
 
+
+lista = [12, 42, 25]
+
+
+class rewrite_len:
+    def __init__(self, l):
+        self.l = l
+
+    def __len__(self):
+        return len(self.l) + 2
+
+    """重写了len函数"""
+
+
+rl = rewrite_len(lista)
+print(len(
+    lista
+))
+print(len(rl))
