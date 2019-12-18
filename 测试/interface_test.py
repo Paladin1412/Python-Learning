@@ -29,10 +29,8 @@ class my_interface_test:
     def get_url(self):
         if self.get_param:
             self.url = self.url + "?" + self.get_param
-            print("The test url is:" + self.url)
             rep = requests.get(headers=self.headers, url=self.url)
         else:
-            print("The test url is:" + self.url)
             rep = requests.get(headers=self.headers, url=self.url)
         return {"code": rep.status_code, "ret": rep.text}
 
