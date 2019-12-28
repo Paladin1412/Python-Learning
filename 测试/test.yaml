@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels: 
+    appname: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+        appname: nginx
+  template:
+    metadata:
+      labels:
+        appname: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: 192.168.11.3:10000/home/ubuntu-tool 
+      imagePullSecrets:       
+       - name: registry-secret
