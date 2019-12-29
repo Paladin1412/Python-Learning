@@ -1,0 +1,2 @@
+#获取当前打开的包名和界面名
+adb shell dumpsys window windows | grep mFocusedApp
