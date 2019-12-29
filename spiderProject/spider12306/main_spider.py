@@ -1,6 +1,8 @@
 from spiderProject.spider12306.dbProcess import DbProcess
 import requests
 import time
+
+
 class Spider12306:
     def __init__(self):
         self._db = DbProcess()
