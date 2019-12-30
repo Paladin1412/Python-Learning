@@ -3,7 +3,7 @@ url = "http://data.snm0516.aisee.tv/log/mobile?android"
 cookie={
     "mng-go":"5a864bd2bf9b9ac8df91e28d83b5d29d61ffa63ee60a4168a4f8950b26c681d1",
 "_AJSESSIONID":"aa5dfa1d9b814026f62c78c50116c8d9",
-"username":"chenbo01",
+"username":"",
 "_gitlab_session":"caa4ea968aacf1158cb43b89122ea9c5",
 "PHPSESSID":"5jrsjshjqs2dngjftn4ku1hsf4"
 }

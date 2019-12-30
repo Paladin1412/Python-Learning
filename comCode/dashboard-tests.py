@@ -14,11 +14,11 @@ class my_dash:
     def login(self):
         t = time.time()
         ts = lambda:int(round(t * 1000))
-        url="https://dashboard-mng.bilibili.co/web/login.do"
+        url=""
         sess = requests.session()
         data={
-            "username":"chenbo01",
-            "password":"1234CBcb",
+            "username":"",
+            "password":"",
             "token":self.token,
             "caller":"",
             "path":"",
@@ -29,7 +29,7 @@ class my_dash:
         return sess
     
     def get_doc(self):
-        ret = self.sess.get("https://www.tapd.cn/21040201/prong/iterations/card_view#iterationId=1121040201001005594&perPage=50&filter_close=true&wallCardType=story&timespan=1576231907097",headers=self.headers)
+        ret = self.sess.get("",headers=self.headers)
         ret.encoding='utf-8'
         print(ret.text)
        

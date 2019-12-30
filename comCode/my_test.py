@@ -1,6 +1,6 @@
 import requests
 import json
-from api_lists import choose_api
+from .api_lists import choose_api
 class myInterfaceTest:
     def __init__(self,api_part,domain,url=None, headers=None, count=1,param=None):
         api = choose_api(domain,api_part)

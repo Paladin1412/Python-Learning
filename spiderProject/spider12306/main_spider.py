@@ -19,14 +19,16 @@ class Spider12306:
         else:
             print("Can't find in redis! Now search mysql...")
             sql = "SELECT city,abbreviation FROM city_abbreviation WHERE city = '{}' OR city = '{}'".format(source,
-                                                                                                            destination)
+                                                                                                       destination)
             ret = self._db.searchDb(sql)
             print(sql)
             for i in ret:
                 if i['city'] == source:
                     sourceCode = i['abbreviation']
+                    self.redisCli.set(i['city'],sourceCode)
                 elif i['city'] == destination:
                     destinationCode = i['abbreviation']
+                    self.redisCli.set(['city'],destinationCode)
         queryUrl = "https://kyfw.12306.cn/otn/leftTicket/queryZ?leftTicketDTO.train_date={}&leftTicketDTO.from_station={}&leftTicketDTO.to_station={}&purpose_codes=ADULT".format(
             leave_time, sourceCode, destinationCode)
         print(queryUrl)
