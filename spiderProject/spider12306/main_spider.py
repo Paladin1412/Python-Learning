@@ -14,9 +14,7 @@ class Spider12306:
     def get_ticket(self, source, destination, leave_time):
         sourceCode = self.redisCli.get(source).decode('utf-8')
         destinationCode = self.redisCli.get(destination).decode('utf-8')
-        if sourceCode and leave_time:
-            print(sourceCode, destinationCode)
-        else:
+        if not sourceCode and leave_time:
             print("Can't find in redis! Now search mysql...")
             sql = "SELECT city,abbreviation FROM city_abbreviation WHERE city = '{}' OR city = '{}'".format(source,
                                                                                                        destination)
