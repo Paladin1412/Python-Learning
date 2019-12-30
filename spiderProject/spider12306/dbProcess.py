@@ -13,13 +13,13 @@ class DbProcess:
             _dbPort = _conf['port']
             _dbHost = _conf['host']
             _dbDb = _conf['db']
-            self.db = pymysql.connect(host=_dbHost,password=_dbPwd,user=_dbUser,port=_dbPort,database=_dbDb)
+            self._db = pymysql.connect(host=_dbHost,password=_dbPwd,user=_dbUser,port=_dbPort,database=_dbDb)
 
     def searchDb(self,sql):
-        with self.db.cursor(cursor=pymysql.cursors.DictCursor) as cursor:
+        with self._db.cursor(cursor=pymysql.cursors.DictCursor) as cursor:
             cursor.execute(sql)
             ret = cursor.fetchall()
-        self.db.close()
+        self._db.close()
         return ret
 
     # def searchDb(self,value):

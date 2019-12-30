@@ -14,9 +14,10 @@ driver=webdriver.Remote('http://127.0.0.1:4723/wd/hub',desired_caps)
 time.sleep(3)
 #跳转到浏览器
 driver.start_activity('com.android.browser','.BrowserActivity')
-driver.quit()
+
 #获取包名
 cp = driver.current_package
 #获取界面名
 ca = driver.current_activity
 print(cp,ca)
+driver.quit()
