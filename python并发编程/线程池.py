@@ -13,6 +13,7 @@ executor = ThreadPoolExecutor(max_workers=2)
 # time.sleep(4)
 # print(t1.done())
 # print(t1.result())#获取执行结果
+
 urls = [3,2,4]
 all_task = [executor.submit(get_html,(i)) for i in urls]
 for future in as_completed(all_task):
