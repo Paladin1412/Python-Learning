@@ -38,7 +38,6 @@ class PaperSpider:
         }
         return self.sess.post(url=req_url, data=post_data)
 
-    def
 
 if __name__ == '__main__':
     ps = PaperSpider()
