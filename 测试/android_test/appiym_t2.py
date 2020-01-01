@@ -9,6 +9,8 @@ desired_caps['platformVersion'] = '6.0'  # 系统的版本号
 desired_caps['deviceName'] = '127.0.0.1:5554'  # 设备名称，这里是虚拟机，这个没有严格的规定
 desired_caps['appPackage'] = 'com.android.settings'  # APP包名
 desired_caps['appActivity'] = '.Settings'  # APP入口的activity
+desired_caps['unicodeKeyboard']=True #支持中文输入
+desired_caps['resetKeyboard']=True
 # 连接appium server，告诉appium，代码要操作哪个设备上的哪个APP
 driver = webdriver.Remote('http://127.0.0.1:4723/wd/hub', desired_caps)
 # 跳转到浏览器
@@ -60,5 +62,38 @@ driver = webdriver.Remote('http://127.0.0.1:4723/wd/hub', desired_caps)
 # back_button = wait.until(lambda x:x.find_elements_by_xpath("//*[@content-desc='收起']"))
 # back_button.click()
 
+#输入和清空输入框内容
+# driver.find_element_by_id("com.android.settings:id/search").click()
+#
+# driver.find_element_by_class_name("android.widget.EditText").send_keys("ssss")
+# time.sleep(2)
+# driver.find_element_by_class_name("android.widget.EditText").clear()
+
+#获取元素文本内容、位置、大小、属性
+# element.text
+# element.location
+# element.size
+# titles = driver.find_element_by_id("com.android.settings:id/search")
+# for title in titles:
+#     print(title.get_attribute("text"))
+#     print(title.get_attribute("resourceId"))
+
+
+###屏幕滑动###
+# #swipe
+# start_x=100 #起点x轴坐标
+# start_y=2000 #起点y轴坐标
+# end_x=100 #终点x轴坐标
+# end_y =1000#终点y轴坐标
+# duration = 300 #滑动这个操作一共持续的时间长度，单位：毫秒
+# driver.swipe(start_x,start_y,end_x,end_y)#参数是坐标点，持续时间短，则惯性大，反之，惯性小
+
+#scroll（从一个元素滑动到另外一个元素，直到页面自动停止）
+# origin_el=driver.find_element_by_xpath("//*[@text='蓝牙']")#滑动开始的元素
+# destination_el=driver.find_element_by_xpath("//*[@text='打印']")#滑动结束的元素
+# driver.scroll(origin_el,destination_el)#从蓝牙滑动到打印，不能设置持续时间，惯性很大
+
+#drag_and_drop滑动事件（从一个元素滑动到另外一个元素，第二个元素替代第一个元素原来的位置）
+# driver.drag_and_drop(origin_el,destination_el)#不能设置持续时间，没有惯性
 
 driver.quit()  # 关闭驱动对象，同时关闭所有关联的app
