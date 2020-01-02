@@ -8,6 +8,3 @@ def make_avg():
         total+=new_value
         return total/new_value
     return avger
-
-t = make_avg()
-print(t(2),t(8))

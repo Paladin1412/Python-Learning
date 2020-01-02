@@ -108,3 +108,4 @@ venv.bak/
 *.exe
 *.json
 
+cmsTester
