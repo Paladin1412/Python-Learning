@@ -1,4 +1,3 @@
-<<<<<<< HEAD:2.1 列表推导和可读性.py
 import array
 
 symbols = '%^&$*#'  #返回UNICODE码位
@@ -18,7 +17,7 @@ c = []
 
 t = [(12, 42), (21, 5), (2, 4, 5, 9)]
 [print(i, *j) for i, *j in t]
-=======
+
 import array
 
 symbols= '%^&$*#' #返回UNICODE码位
@@ -38,4 +37,4 @@ c=[]
 
 t = [(12,42),(21,5),(2,4,5,9)]
 [ print(i,*j) for i,*j in t]
->>>>>>> 56918e34d465d173b59aac360eeaaf9b8967dbe6:流畅的python/2.1 列表推导和可读性.py
+
