@@ -8,3 +8,10 @@ def make_avg():
         total+=new_value
         return total/new_value
     return avger
+
+b =6
+def f1(a):
+    print(a)
+    print(b)
+    # b=9
+f1(3)

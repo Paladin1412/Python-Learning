@@ -13,5 +13,5 @@ class User:
 
 if __name__ == '__main__':
     user = User("n",12)
-    print(user.ten_age=10)
-    print(ten_age)
+    user.ten_age=10
+    print(user.ten_age)
