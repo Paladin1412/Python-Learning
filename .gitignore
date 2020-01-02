@@ -108,4 +108,5 @@ venv.bak/
 *.exe
 *.json
 
-cmsTester
+cmsTester.py
+cms_sel_test.py
