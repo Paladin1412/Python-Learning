@@ -1,5 +1,12 @@
-async def downloader(url):
-    return "m"
+import types
+
+
+@types.coroutine
+def downloader(url):
+    yield 'm'
+
+# async def downloader(url):
+#     return "m"
 
 
 async def download_url(url):
