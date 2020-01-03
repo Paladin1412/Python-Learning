@@ -5,7 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 driver = webdriver.Firefox(
     executable_path=
-    "/Users/michael/Desktop/project/code/Python-Learning/测试/geckodriver")
+    "/auto_tester/geckodriver")
 driver.get("https://www.baidu.com")
 now_window = driver.current_window_handle
 driver.find_element_by_id("kw").send_keys("上海理工大学研究生")

@@ -1,4 +1,4 @@
-from 测试.normal_modules.normal import NormalTester
+from auto_tester.normal_modules.normal import NormalTester
 import json
 
 
