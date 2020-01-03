@@ -1,6 +1,0 @@
-#获取当前打开的包名和界面名
-adb shell dumpsys window windows | grep mFocusedApp
-
-#打开设置
-adb shell am start -n com.android.settings/com.android.settings.Settings \
-        Starting: Intent { cmp=com.android.settings/.Settings}

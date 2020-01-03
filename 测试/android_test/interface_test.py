@@ -4,7 +4,7 @@ import json
 
 class my_interface_test:
     def __init__(self, url=None, headers=None, count=1, data=None, get_param=None):
-        domain = "http://callback-api.bilibili.cn"
+        domain = ""
         self.headers = headers
         self.url = domain + url
         self.count = count

@@ -1,0 +1,5 @@
+pymongo
+requests
+Appium-Python-Client
+selenium
+redis

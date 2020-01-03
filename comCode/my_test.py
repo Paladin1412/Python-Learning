@@ -47,7 +47,7 @@ class myInterfaceTest:
         self.store_file(ret)
     
     def store_file(self,string):
-        with open("test.json","w",encoding="utf-8") as fp:
+        with open("config.json","w",encoding="utf-8") as fp:
             fp.writelines(str(string))
 if __name__ == "__main__":
     param=["build=1221","tv=11"]
