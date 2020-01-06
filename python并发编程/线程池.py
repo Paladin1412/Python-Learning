@@ -24,3 +24,4 @@ for data in executor.map(get_html,urls):
     #根据all_task顺序来返回结果
     print("get {} page success".format(data))
 
+()
