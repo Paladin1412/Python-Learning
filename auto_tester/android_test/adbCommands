@@ -2,4 +2,10 @@
 adb shell dumpsys window windows | grep mFocusedApp
 
 #打开设置
-adb shell am start -n com.android.settings/c    om.android.settings.Settings Starting: Intent { cmp=com.android.settings/.Settings}
+adb shell am start -n com.android.settings/com.android.settings.Settings Starting: Intent {cmp=com.android.settings/.Settings}
+
+#get current windows activity
+adb shell dumpsys window|grep mCurrentFocus
+
+#get fps
+adb shell dumpsys SurfaceFlinger --latency com.xiaodianshi.tv.yst/com.xiaodianshi.tv.yst.ui.main.MainActivity
