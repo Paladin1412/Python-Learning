@@ -9,3 +9,22 @@ adb shell dumpsys window|grep mCurrentFocus
 
 #get fps
 adb shell dumpsys SurfaceFlinger --latency com.xiaodianshi.tv.yst/com.xiaodianshi.tv.yst.ui.main.MainActivity
+
+#monkey test
+-p  指定包名 （所有命令都在此包内执行，如不指定，则在整个系统内执行）
+
+-v  log详细程度（最高支持’-v -v -v’最详细） 
+
+-s  种子 （指定种子后，同一条命令在任意时间、地点的执行顺序都相同）
+
+--throttle  单步延时（每步操作间隔，单位毫秒）
+
+--kill-process-after-error  出错时杀掉进程
+
+--ignore-timeouts  忽略超时错误
+
+--ignore-security-exceptions  忽略许可错误
+adb shell monkey -p com.xiaodianshi.tv.yst --throttle 500 -vvv 100 -s 12
+
+#获取当前UI层布局
+adb shell uiautomator dump /sdcard/ui.xml
