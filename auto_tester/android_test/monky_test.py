@@ -11,14 +11,7 @@ class MonkeyTester:
         subprocess.call("adb shell monkey -p com.xiaodianshi.tv.yst --throttle 50 -vvv 100 -s 12",shell=True)
 
     def back_to_index(self):
-        while True:
-            print("b")
-            subprocess.call("adb shell uiautomator dump /sdcard/ui.xml",shell=True)
-            ret = subprocess.Popen("adb shell cat /sdcard/ui.xml | grep '精选'",shell=True)
-            print("*"*1000)
-            if ret.communicate():
-                print("ret is ",ret.communicate())
-                return
+        for i in range(2):
             subprocess.call("adb shell input keyevent 4",shell=True)
 
     def main(self):
