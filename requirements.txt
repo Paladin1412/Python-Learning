@@ -1,3 +1,6 @@
+psutil
+matplotlib
+urllib3
 pymongo
 requests
 Appium-Python-Client

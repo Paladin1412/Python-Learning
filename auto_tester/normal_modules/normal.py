@@ -16,9 +16,11 @@ class NormalTester:
             mongo_pwd = ret['mongo']['pwd']
             mongo_port = ret['mongo']['port']
         self.sess = requests.session()
+        self.sess.verify = False
         self.sess.headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
-                          "Chrome/78.0.3904.108 Safari/537.36 "
+                          "Chrome/78.0.3904.108 Safari/537.36 ",
+            "Referer":""
         }
         self.cookies = cookies
         self.redis_cli = redis.Redis(host=host, port=redis_port, password=redis_pwd, db=1)
@@ -29,10 +31,11 @@ class NormalTester:
         return self.sess.get(url, cookies=self.cookies)
 
     def post_url(self, url, data):
-        return self.sess.post(url=url, data=data)
+        return self.sess.post(url=url, data=data, cookies=self.cookies)
 
     def get_url_json(self, url):
-        return json.loads(self.get_url(url).text)
+
+        return json.loads(self.sess.get(url, cookies=self.cookies).text)
 
     def post_url_json(self, url, data):
-        return json.loads(self.sess.post(url=url, data=data).text)
+        return json.loads(self.sess.post(url=url, data=data, cookies=self.cookies).text)

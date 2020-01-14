@@ -3,3 +3,9 @@ adb shell dumpsys window windows | grep mFocusedApp
 
 #打开设置
 adb shell am start -n com.android.settings/c    om.android.settings.Settings Starting: Intent { cmp=com.android.settings/.Settings}
+
+#添加代理
+adb shell settings put global http_proxy 127.0.0.1:8888
+
+#删除代理
+adb shell settings delete global http_proxy
