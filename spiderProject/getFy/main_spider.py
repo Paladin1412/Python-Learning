@@ -34,16 +34,16 @@ class PneumoniaSpider:
 
     def start(self):
 
-        self.programme_flag = str(self.rc.get("isRunProgramme"), encoding='utf-8')
-        spider_flag = str(self.rc.get("isRunSpider"), encoding='utf-8')
+        # self.programme_flag = str(self.rc.get("isRunProgramme"), encoding='utf-8')
+        # spider_flag = str(self.rc.get("isRunSpider"), encoding='utf-8')
         url = str(self.rc.get("captcha_url"), encoding='utf-8')
-        print("Now programme_flag is {},spider_flag is {}, url is {}".format(self.programme_flag, spider_flag, url))
+        # print("Now programme_flag is {},spider_flag is {}, url is {}".format(self.programme_flag, spider_flag, url))
         print("Init success!")
-        while spider_flag:
-            self.run_spider(url)
-            print("This is " + str(self.iota) + " run success!")
-            self.iota += 1
-            time.sleep(5)
+        # while spider_flag:
+        self.run_spider(url)
+        print("This is " + str(self.iota) + " run success!")
+        self.iota += 1
+            # time.sleep(5)
 
     def run_spider(self, url):
         print("=========Now get data============")
@@ -96,10 +96,12 @@ class PneumoniaSpider:
             for data in data_list:
                 try:
                     table_name = city_py_map[data['city_name']]
-                    sql_str = "INSERT INTO pneumonia_record.{}(city_nameconfirm_num,death_num,cure_num) values({},{},{})".format(
-                        table_name, data['data']['confirm_num'], data['data']['death_num'], data['data']['cure_num'])
+                    sql_str = "INSERT INTO pneumonia_record.{}(city_name,confirm_num,death_num,cure_num) values({},{},{},{})".format(
+                        data['city_name'],table_name, data['data']['confirm_num'], data['data']['death_num'], data['data']['cure_num'])
                     print(sql_str)
                     cursor.execute(sql_str)
+                    sql_str2 = "INSERT INTO pneumonia_record.all_city_new(city_name,confirm_num,death_num,cure_num) values({},{},{},{})".format(
+                        data['city_name'],table_name, data['data']['confirm_num'], data['data']['death_num'], data['data']['cure_num'])
                 except Exception as e:
                     print("db_insert_handle err is ", e)
             self.db.commit()
@@ -127,5 +129,4 @@ class PneumoniaSpider:
 
 if __name__ == '__main__':
     sp = PneumoniaSpider()
-    sp.db_create_table({"所有城市最新数据":"all_city_new"})
-
+    sp.start()
