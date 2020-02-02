@@ -4,7 +4,6 @@ import pymysql
 import redis
 import time
 import re
-from threading import Thread
 
 city_py_map = {'湖北': 'hu_bei', '广东': 'guang_dong', '河南': 'he_nan', '浙江': 'zhe_jiang', '重庆': 'chong_qin', '湖南': 'hu_nan',
                '山东': 'shan_dong', '北京': 'bei_jing', '安徽': 'an_hui', '四川': 'si_chuan', '福建': 'fu_jian', '江西': 'jiang_xi',
@@ -34,20 +33,21 @@ class PneumoniaSpider:
 
     def start(self):
 
-        # self.programme_flag = str(self.rc.get("isRunProgramme"), encoding='utf-8')
-        # spider_flag = str(self.rc.get("isRunSpider"), encoding='utf-8')
+        self.programme_flag = str(self.rc.get("isRunProgramme"), encoding='utf-8')
+        spider_flag = str(self.rc.get("isRunSpider"), encoding='utf-8')
         url = str(self.rc.get("captcha_url"), encoding='utf-8')
-        # print("Now programme_flag is {},spider_flag is {}, url is {}".format(self.programme_flag, spider_flag, url))
+        print("Now programme_flag is {},spider_flag is {}, url is {}".format(self.programme_flag, spider_flag, url))
         print("Init success!")
-        # while spider_flag:
-        self.run_spider(url)
-        print("This is " + str(self.iota) + " run success!")
-        self.iota += 1
-            # time.sleep(5)
+        while spider_flag:
+            self.run_spider(url)
+            print("This is " + str(self.iota) + " run success!")
+            self.iota += 1
+            time.sleep(10)
 
     def run_spider(self, url):
         print("=========Now get data============")
         ret = json.loads(self.sess.get(url).text)
+
         self.all_city = ret["forum"]["rich_content"]
         self.city_details_lists = eval(ret["forum"]["extra"]["ncov_string_list"])
         city_map = self.handle_city_details_lists()
@@ -96,12 +96,15 @@ class PneumoniaSpider:
             for data in data_list:
                 try:
                     table_name = city_py_map[data['city_name']]
-                    sql_str = "INSERT INTO pneumonia_record.{}(city_name,confirm_num,death_num,cure_num) values({},{},{},{})".format(
-                        data['city_name'],table_name, data['data']['confirm_num'], data['data']['death_num'], data['data']['cure_num'])
+                    sql_str = "INSERT INTO pneumonia_record.{}(city_name,confirm_num,death_num,cure_num) values('{}',{},{},{})".format(
+                        table_name, data['city_name'], data['data']['confirm_num'], data['data']['death_num'],
+                        data['data']['cure_num'])
                     print(sql_str)
                     cursor.execute(sql_str)
-                    sql_str2 = "INSERT INTO pneumonia_record.all_city_new(city_name,confirm_num,death_num,cure_num) values({},{},{},{})".format(
-                        data['city_name'],table_name, data['data']['confirm_num'], data['data']['death_num'], data['data']['cure_num'])
+                    sql_str2 = "UPDATE pneumonia_record.all_city_new SET confirm_num={},death_num={},cure_num={} WHERE city_name='{}'".format(
+                        data['data']['confirm_num'], data['data']['death_num'], data['data']['cure_num'],
+                        data['city_name'])
+                    cursor.execute(sql_str2)
                 except Exception as e:
                     print("db_insert_handle err is ", e)
             self.db.commit()
@@ -126,7 +129,12 @@ class PneumoniaSpider:
                     print(e)
             self.db.commit()
 
-
+    def db_tmp_insert(self,table:dict):
+        with self.db.cursor()as cursor:
+            for city,city_py in table.items():
+                sql_str = "insert into pneumonia_record.city_list(city_name,city_py) values ('{}','{}')".format(city,city_py)
+                cursor.execute(sql_str)
+            self.db.commit()
 if __name__ == '__main__':
     sp = PneumoniaSpider()
-    sp.start()
+    sp.db_tmp_insert(city_py_map)
