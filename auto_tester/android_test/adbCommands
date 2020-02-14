@@ -28,3 +28,7 @@ adb shell monkey -p com.xiaodianshi.tv.yst --throttle 500 -vvv 100 -s 12
 
 #获取当前UI层布局
 adb shell uiautomator dump /sdcard/ui.xml
+
+#proxy
+adb shell settings delete global http_proxy
+adb shell settings put global http_proxy 127.0.0.1:8888

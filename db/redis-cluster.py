@@ -11,7 +11,7 @@ class RedisCli:
         try:
             return json.loads(rep)
         except Exception as e:
-            print(e)
+            print("error:", e)
 
     def get_code_by_phone_num(self, phone_num):
         startup_nodes = [{"host": "172.22.33.30", "port": "7304"}]
@@ -26,5 +26,9 @@ class RedisCli:
 
 if __name__ == '__main__':
     rc = RedisCli()
-    ret = rc.get_code_by_captcha_key("f05d6c18a7bcf3106c0dd11ce498eea1")
-    print(ret)
+    while True:
+        cp_key = input("captcha_key:\n")
+        if cp_key == 'q':
+            break
+        ret = rc.get_code_by_captcha_key(cp_key)
+        print(ret, end='\n')
