@@ -5,12 +5,14 @@ import redis
 import time
 import random
 import sys
+import logging
 
-
-LOOP_FLAG = True
-
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+iota = 1
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s %(levelname)s %(message)s', )
 while True:
-    urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+    logging.info("This is {} captcha.".format(iota))
     url = "https://twrp.me/Devices/Xiaomi/"
     headers = {
         "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 NewsArticle/7.5.7.32 JsSdk/2.0 NetType/WIFI (News 7.5.7 13.300000)",
@@ -24,9 +26,9 @@ while True:
     ret = e_page.xpath('//ul[@class="post-list"]/p/strong/a/text()')
     for i in ret:
         if "10" in i:
-            LOOP_FLAG = False
             rc = redis.Redis(host="192.168.11.31", port="30002")
             rc.set("twrpCheck", "True")
-            print("TWRP CHECK EXIST!!!")
+            logging.info("TWRP CHECK EXIST!!!")
             sys.exit(0)
+    iota += 1
     time.sleep(60 * random.uniform(1, 2))
