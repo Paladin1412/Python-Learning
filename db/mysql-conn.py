@@ -6,3 +6,4 @@ with db.cursor() as cursor:
     ret = cursor.fetchall()
 print(ret)
 db.close()
+
