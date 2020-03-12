@@ -24,7 +24,7 @@ adb shell dumpsys SurfaceFlinger --latency com.xiaodianshi.tv.yst/com.xiaodiansh
 --ignore-timeouts  忽略超时错误
 
 --ignore-security-exceptions  忽略许可错误
-adb shell monkey -p com.xiaodianshi.tv.yst --throttle 500 -vvv 100 -s 12
+adb shell monkey -p com.xiaodianshi.tv.yst --throttle 500 -vvv 480 -s 12
 
 #获取当前UI层布局
 adb shell uiautomator dump /sdcard/ui.xml
