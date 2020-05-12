@@ -17,7 +17,12 @@
 # if __name__ == "__main__":
 #     coro = download_url("www")
 #     coro.send(None)
-a=[1,2]
-b=[1,2]
-if a == b:
-    print(1)
+
+def y():
+    yield 1
+def y2():
+    a = yield from y()
+    print(a)
+
+y2().send(None)
+next(y2())
