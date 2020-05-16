@@ -21,7 +21,7 @@ class AutoOffice:
             if file.endswith(".csv"):
                 self.target_csv_files.append(file)
         logging.info("Initialization succeed!")
-
+    
     def switch_to_lists(self, lists: str):
         lists = lists.split(",")
         lists = [x.replace("\n", "") for x in lists]

@@ -20,7 +20,7 @@ if __name__ == '__main__':
     start_time = time.time()
     loop = asyncio.get_event_loop()
     # tasks = [get_html("www.baidu.com") for i in range(100)]
-    # loop.run_until_complete(asyncio.wait(tasks))
+    # loop.run_until_complete(asyncio.wait(tasks))//相当于join
     task = loop.create_task(get_html("www.baidu.com"))
     # task.add_done_callback(partial(callback,"www"))
     # loop.run_until_complete(task)
