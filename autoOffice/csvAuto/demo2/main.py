@@ -1,7 +1,7 @@
 import pandas as pd
 import sys
 
-data = pd.read_csv('../csv_files/1.csv')
+data = pd.read_csv('../practise1/raw_files/1.csv')
 new = {"总价":[]}
 npd=pd.DataFrame(new,index=[])
 print(npd)
