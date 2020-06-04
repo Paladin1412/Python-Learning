@@ -1,7 +1,18 @@
-def test():
-    return 1,2
+from threading import Thread
 
-def te(a=0,b=0):
-    print(a,b)
+a = []
 
-te(*test())
+
+def ad(n):
+    for i in range(n):
+        a.append(n)
+
+
+t1 = Thread(target=ad,args=(100,))
+t2 = Thread(target=ad,args=(200,))
+
+t1.start()
+t2.start()
+t1.join()
+t2.join()
+print(len(a))

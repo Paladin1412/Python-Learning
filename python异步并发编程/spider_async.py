@@ -32,7 +32,7 @@ if __name__ == '__main__':
     import time
     now = lambda: time.time()
     city_list = get_city_list()
-    [city_list.extend(city_list) for i in range(7)]
+    [city_list.extend(city_list) for i in range(9)]
     print(len(city_list))
     loop = asyncio.get_event_loop()
     start = now()
