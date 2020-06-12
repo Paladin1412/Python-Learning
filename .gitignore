@@ -110,3 +110,4 @@ venv.bak/
 
 cmsTester.py
 cms_sel_test.py
+*.php
