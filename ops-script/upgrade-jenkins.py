@@ -19,16 +19,19 @@ def start(argv):
             version = args
     logging.info("Get version: {}".format(version))
     logging.info("Try to pull from registry...")
-    subprocess.call("docker pull jenkins/jenkins:{}".format(version))
+    subprocess.check_call(["docker", "pull", "jenkins/jenkins:{}".format(version)])
     logging.info("Try to push to local registry...")
-    subprocess.call("docker tag jenkins/jenkins:{} 192.168.11.3:10000/home/jenkins:{}".format(version, version))
-    subprocess.call("docker push 192.168.11.3:10000/home/jenkins:{}".format(version))
+    subprocess.check_call(
+        ["docker", "tag", "jenkins/jenkins:{}".format(version), "192.168.11.3:10000/home/jenkins:{}".format(version)])
+    subprocess.check_call(["docker", "push", "192.168.11.3:10000/home/jenkins:{}".format(version)])
     logging.info("Changing jenkins pod image...")
-    subprocess.call(
-        "kubectl set image -n ci --record deployment jenkins-ci jenkins-ci=192.168.11.3:10000/home/jenkins:{}".format(
-            version))
-    subprocess.call("kubectl rollout status deploy jenkins-ci -n ci")
+    subprocess.check_call(
+        ["kubectl", "set", "image", "-n", "ci", "--record", "deployment", "jenkins-ci",
+         "jenkins-ci=192.168.11.3:10000/home/jenkins:{}".format(
+             version)])
+    subprocess.check_call("kubectl rollout status deploy jenkins-ci -n ci")
     logging.info("SUCCESS!")
+
 
 if __name__ == '__main__':
     start(sys.argv[1:])
