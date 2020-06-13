@@ -29,7 +29,7 @@ def start(argv):
         ["kubectl", "set", "image", "-n", "ci", "--record", "deployment", "jenkins-ci",
          "jenkins-ci=192.168.11.3:10000/home/jenkins:{}".format(
              version)])
-    subprocess.check_call("kubectl rollout status deploy jenkins-ci -n ci")
+    subprocess.check_call(["kubectl", "rollout", "status", "deploy", "jenkins-ci", "-n", "ci"])
     logging.info("SUCCESS!")
 
 
